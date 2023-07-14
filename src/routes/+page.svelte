@@ -1,12 +1,12 @@
 <script>
-	import App from "../components/App.svelte";
+	import App from '../components/App.svelte';
 </script>
 
 <App />
 
 <div class="w-full top-[-20px]">
-    <img src="cs-top.jpg" />
-    <img src="cs-bottom.jpg" />
+	<img src="cs-top.jpg" />
+	<img src="cs-bottom.jpg" />
 </div>
 
 <!-- <div class="absolute">
