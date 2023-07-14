@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { name, race, kingdom, career, zaifas } from '../store';
+    import { name, race, kingdom, career, zaifas } from '../lib/store';
 </script>
 
 <fieldset class="m-1 border-4 border-black border-double">
