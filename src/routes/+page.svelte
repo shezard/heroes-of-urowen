@@ -1,13 +1,16 @@
 <script>
+	import App from "../components/App.svelte";
 	import { name, race, kingdom, career, zaifas } from "../store";
 </script>
 
-<div class="absolute w-full top-[-20px]">
+<App />
+
+<div class="w-full top-[-20px]">
     <img src="cs-top.jpg" />
     <img src="cs-bottom.jpg" />
 </div>
 
-<div class="absolute">
+<!-- <div class="absolute">
     <input
         type="text" bind:value={$name}
         class="top-[32px] left-[80px]"
@@ -28,7 +31,7 @@
         type="number" bind:value={$zaifas}
         class="top-[936px] left-[295px]"
     />
-</div>
+</div> -->
 
 <style>
     input {
