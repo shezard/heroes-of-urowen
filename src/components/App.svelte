@@ -54,38 +54,40 @@
         </label>
     </div>
 
-    <hr />
+    <hr class="border-black m-1" />
 
-    <div class="grid p-1">
-        <label class="flex">
+    <div class="grid grid-cols-2 p-1">
+        <span class="flex">
             <span class="px-1">
                 STR : {$bonus.STR} +
             </span>
             <input class="w-10" type="number" bind:value={$store.baseSTR} />
             <span>= {$store.baseSTR + $bonus.STR}</span>
-        </label>
-        <label class="flex">
+        </span>
+        <span class="flex">
             <span class="px-1">
                 SK : {$bonus.SK} +
             </span>
             <input class="w-10" type="number" bind:value={$store.baseSK} />
             <span>= {$store.baseSK + $bonus.SK}</span>
-        </label>
-        <label class="flex">
+        </span>
+        <span class="flex">
             <span class="px-1">
                 MAG : {$bonus.MAG} +
             </span>
             <input class="w-10" type="number" bind:value={$store.baseMAG} />
             <span>= {$store.baseMAG + $bonus.MAG}</span>
-        </label>
-        <label class="flex">
+        </span>
+        <span class="flex">
             <span class="px-1">
                 PER : {$bonus.PER} +
             </span>
             <input class="w-10" type="number" bind:value={$store.basePER} />
             <span>= {$store.basePER + $bonus.PER}</span>
-        </label>
+        </span>
     </div>
+
+    <hr class="border-black m-1" />
 </fieldset>
 
 <style>
