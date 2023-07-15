@@ -21,7 +21,7 @@ const config = {
         paths: {
             base: '/heroes-of-urowen'
         }
-    },
+    }
 };
 
 export default config;
