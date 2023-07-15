@@ -20,6 +20,12 @@ const config = {
         adapter: adapter(),
         paths: {
             base: '/heroes-of-urowen'
+        },
+        prerender: {
+            entries: [
+                '/',
+                '/save'
+            ]
         }
     }
 };
