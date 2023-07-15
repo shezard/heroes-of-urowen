@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-const races = {
+export const races = {
     elf: {
         sylvan: 'MAG',
         snow: 'SK'
@@ -23,7 +23,7 @@ type Kingdom =
     | keyof (typeof races)['dwarf']
     | keyof (typeof races)['human'];
 
-const careers = {
+export const careers = {
     sorcerer: {
         attribute: 'MAG',
         special: 'reroll 1 as 3'
@@ -67,16 +67,24 @@ export const zaifas = writable(15);
 
 export type Save = {
     name: string;
-    race: Race | null;
+    race: Race;
     kingdom: Kingdom | null;
     career: Career | null;
+    baseSTR: number;
+    baseSK: number;
+    baseMAG: number;
+    basePER: number;
 };
 
 export const emptySave: Save = {
     name: '',
-    race: null,
+    race: 'elf',
     kingdom: null,
-    career: null
+    career: null,
+    baseSTR: 0,
+    baseSK: 0,
+    baseMAG: 0,
+    basePER: 0
 };
 
 export const store = writable<Save>(emptySave);

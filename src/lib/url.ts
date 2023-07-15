@@ -10,12 +10,7 @@ export const encode = function (save: Save): string {
 
 export const decode = function (url: string | null): Save {
     if (typeof window === 'undefined' || url == null) {
-        return {
-            name: '',
-            race: null,
-            kingdom: null,
-            career: null
-        };
+        return emptySave;
     }
 
     let save: Save;
