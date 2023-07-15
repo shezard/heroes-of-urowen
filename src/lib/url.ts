@@ -8,8 +8,8 @@ export const encode = function (save: Save): string {
     return window.btoa(JSON.stringify(save));
 };
 
-export const decode = function (url: string): Save {
-    if (typeof window === 'undefined') {
+export const decode = function (url: string | null): Save {
+    if (typeof window === 'undefined' || url == null) {
         return {
             name: '',
             race: null,

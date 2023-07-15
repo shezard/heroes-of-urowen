@@ -4,17 +4,22 @@
     import { encode } from '$lib/url';
     import { get } from 'svelte/store';
     import { store } from '../lib/store';
+    import { page } from '$app/stores';
 
     const save = () => {
         const save = encode(get(store));
-        goto(`${base}/${save}`);
+        goto(`${base}?save=${save}`);
     };
 
+    $: store.set($page.data.save);
 </script>
 
 <fieldset class="m-1 border-4 border-black border-double">
-    <legend class="text-3xl ml-5 px-2"> Heroes of Urowen
-        <span on:click={save}>[Save]</span>
+    <legend class="text-3xl ml-5 px-2">
+        Heroes of Urowen
+        <span on:click={save} role="button" tabindex="0">
+            [Save]
+        </span>
     </legend>
 
     <div class="grid grid-cols-2">
@@ -45,19 +50,19 @@
             <div>
                 <label class="flex">
                     Strenght (STR)
-                    <input type="number" />
+                    <input type="number" bind:value={$store.baseSTR} />
                 </label>
                 <label class="flex">
                     Skill (SK)
-                    <input type="number" />
+                    <input type="number" bind:value={$store.baseSK} />
                 </label>
                 <label class="flex">
                     Magic (MAG)
-                    <input type="number" />
+                    <input type="number" bind:value={$store.baseMAG} />
                 </label>
                 <label class="flex">
                     Perception (PER)
-                    <input type="number" />
+                    <input type="number" bind:value={$store.basePER} />
                 </label>
             </div>
         </div>
