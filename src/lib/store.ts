@@ -1,4 +1,6 @@
-import { writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
+
+type StatName = 'STR' | 'SK' | 'MAG' | 'PER';
 
 export const races = {
     elf: {
@@ -56,11 +58,6 @@ export const careers = {
 
 type Career = keyof typeof careers;
 
-export const name = writable('');
-export const race = writable<Race>();
-export const kingdom = writable('');
-export const career = writable('');
-
 export const lp = writable(20);
 
 export const zaifas = writable(15);
@@ -68,8 +65,8 @@ export const zaifas = writable(15);
 export type Save = {
     name: string;
     race: Race;
-    kingdom: Kingdom | null;
-    career: Career | null;
+    kingdom: Kingdom;
+    career: Career;
     baseSTR: number;
     baseSK: number;
     baseMAG: number;
@@ -79,8 +76,8 @@ export type Save = {
 export const emptySave: Save = {
     name: '',
     race: 'elf',
-    kingdom: null,
-    career: null,
+    kingdom: 'snow',
+    career: 'warrior',
     baseSTR: 0,
     baseSK: 0,
     baseMAG: 0,
@@ -88,3 +85,61 @@ export const emptySave: Save = {
 };
 
 export const store = writable<Save>(emptySave);
+
+export const getBonus = function(statName : StatName)
+{
+    let bonus = 0;
+
+    const save = get(store);
+    const kingdom = races[save.race][save.kingdom];
+    const career = careers[save.career];
+
+    if(career.attribute == statName) {
+        bonus += 1;
+    }
+
+    return bonus;
+}
+
+const makeBonus = function(statName : StatName) {
+    return function(store : Save) {
+        let bonus = 0;
+
+        const kingdom = races[store.race][store.kingdom];
+        const career = careers[store.career];
+
+        if(kingdom == statName) {
+            bonus += 1;
+        }
+
+        if(career.attribute == statName) {
+            bonus += 1;
+        }
+
+        return bonus;
+    }
+}
+
+export const bonus = derived(store, function(store: Save) : Record<StatName, number> {
+
+    const bonus = {
+        STR : 0,
+        SK : 0,
+        MAG : 0,
+        PER : 0
+    }
+
+    const kingdom = races[store.race][store.kingdom];
+    const career = careers[store.career];
+
+    bonus[kingdom] += 1;
+
+    if(bonus[career.attribute] == 0) {
+        bonus[career.attribute] += 1;
+    } else {
+        bonus.PER += 1;
+    }
+
+
+    return bonus;
+});

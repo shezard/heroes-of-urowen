@@ -3,7 +3,7 @@
     import { base } from '$app/paths';
     import { encode } from '$lib/url';
     import { get } from 'svelte/store';
-    import { careers, races, store } from '../lib/store';
+    import { careers, bonus, races, store } from '../lib/store';
     import { page } from '$app/stores';
 
     const save = () => {
@@ -54,29 +54,37 @@
         </label>
     </div>
 
-    <div class="grid grid-cols-2">
-        <div class="p-1">
-            Stats
-            <div>
-                <label class="flex">
-                    Strenght (STR)
-                    <input type="number" bind:value={$store.baseSTR} />
-                </label>
-                <label class="flex">
-                    Skill (SK)
-                    <input type="number" bind:value={$store.baseSK} />
-                </label>
-                <label class="flex">
-                    Magic (MAG)
-                    <input type="number" bind:value={$store.baseMAG} />
-                </label>
-                <label class="flex">
-                    Perception (PER)
-                    <input type="number" bind:value={$store.basePER} />
-                </label>
-            </div>
-        </div>
-        <div class="p-1">test 2</div>
+    <hr />
+
+    <div class="grid p-1">
+        <label class="flex">
+            <span class="px-1">
+                STR : {$bonus.STR} +
+            </span>
+            <input class="w-10" type="number" bind:value={$store.baseSTR} />
+            <span>= {$store.baseSTR + $bonus.STR}</span>
+        </label>
+        <label class="flex">
+            <span class="px-1">
+                SK : {$bonus.SK} +
+            </span>
+            <input class="w-10" type="number" bind:value={$store.baseSK} />
+            <span>= {$store.baseSK + $bonus.SK}</span>
+        </label>
+        <label class="flex">
+            <span class="px-1">
+                MAG : {$bonus.MAG} +
+            </span>
+            <input class="w-10" type="number" bind:value={$store.baseMAG} />
+            <span>= {$store.baseMAG + $bonus.MAG}</span>
+        </label>
+        <label class="flex">
+            <span class="px-1">
+                PER : {$bonus.PER} +
+            </span>
+            <input class="w-10" type="number" bind:value={$store.basePER} />
+            <span>= {$store.basePER + $bonus.PER}</span>
+        </label>
     </div>
 </fieldset>
 
@@ -85,7 +93,7 @@
         font-family: 'BlackCastle';
     }
 
-    input,
+    input:not(.w-10),
     select {
         width: 100%;
         text-indent: 2px;
