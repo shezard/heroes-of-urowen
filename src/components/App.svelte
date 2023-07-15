@@ -1,29 +1,41 @@
 <script lang="ts">
-    import { name, race, kingdom, career, zaifas } from '../lib/store';
+    import { goto } from '$app/navigation';
+    import { base } from '$app/paths';
+    import { encode } from '$lib/url';
+    import { get } from 'svelte/store';
+    import { store } from '../lib/store';
+
+    const save = () => {
+        const save = encode(get(store));
+        goto(`${base}/${save}`);
+    };
+
 </script>
 
 <fieldset class="m-1 border-4 border-black border-double">
-    <legend class="text-3xl ml-5 px-2"> Heroes of Urowen </legend>
+    <legend class="text-3xl ml-5 px-2"> Heroes of Urowen
+        <span on:click={save}>[Save]</span>
+    </legend>
 
     <div class="grid grid-cols-2">
         <label class="flex p-1">
             Name
-            <input type="text" bind:value={$name} />
+            <input type="text" bind:value={$store.name} />
         </label>
 
         <label class="flex p-1">
             Race
-            <input type="text" bind:value={$race} />
+            <input type="text" bind:value={$store.race} />
         </label>
 
         <label class="flex p-1">
             Kingdom
-            <input type="text" bind:value={$kingdom} />
+            <input type="text" bind:value={$store.kingdom} />
         </label>
 
         <label class="flex p-1">
             Career
-            <input type="text" bind:value={$career} />
+            <input type="text" bind:value={$store.career} />
         </label>
     </div>
 
