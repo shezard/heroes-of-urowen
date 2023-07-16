@@ -5,6 +5,7 @@
     import { get } from 'svelte/store';
     import { careers, bonus, races, store } from '../lib/store';
     import { page } from '$app/stores';
+    import Stat from './Stat.svelte';
 
     const save = () => {
         const save = encode(get(store));
@@ -54,40 +55,22 @@
         </label>
     </div>
 
-    <hr class="border-black m-1" />
+    <hr class="border-black m-2" />
 
     <div class="grid grid-cols-2 p-1">
-        <span class="flex">
-            <span class="px-1">
-                STR : {$bonus.STR} +
-            </span>
-            <input class="w-10" type="number" bind:value={$store.baseSTR} />
-            <span>= {$store.baseSTR + $bonus.STR}</span>
-        </span>
-        <span class="flex">
-            <span class="px-1">
-                SK : {$bonus.SK} +
-            </span>
-            <input class="w-10" type="number" bind:value={$store.baseSK} />
-            <span>= {$store.baseSK + $bonus.SK}</span>
-        </span>
-        <span class="flex">
-            <span class="px-1">
-                MAG : {$bonus.MAG} +
-            </span>
-            <input class="w-10" type="number" bind:value={$store.baseMAG} />
-            <span>= {$store.baseMAG + $bonus.MAG}</span>
-        </span>
-        <span class="flex">
-            <span class="px-1">
-                PER : {$bonus.PER} +
-            </span>
-            <input class="w-10" type="number" bind:value={$store.basePER} />
-            <span>= {$store.basePER + $bonus.PER}</span>
-        </span>
+        <Stat name='STR' />
+        <Stat name='SK' />
+        <Stat name='MAG' />
+        <Stat name='PER' />
     </div>
 
-    <hr class="border-black m-1" />
+    <hr class="border-black m-2" />
+
+    <div class="grid grid-cols-3 p-1">
+        <Stat name='LP' />
+        <Stat name='PP' />
+        <Stat name='XP' />
+    </div>
 </fieldset>
 
 <style>

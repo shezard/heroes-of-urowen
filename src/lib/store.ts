@@ -1,6 +1,6 @@
 import { derived, writable } from 'svelte/store';
 
-type StatName = 'STR' | 'SK' | 'MAG' | 'PER';
+export type StatName = 'STR' | 'SK' | 'MAG' | 'PER' | 'LP' | 'PP' | 'XP';
 
 export const races = {
     elf: {
@@ -28,30 +28,37 @@ type Kingdom =
 export const careers = {
     sorcerer: {
         attribute: 'MAG',
+        PP: 3,
         special: 'reroll 1 as 3'
     },
     hunter: {
         attribute: 'PER',
+        PP: 0,
         special: 'bow'
     },
     warrior: {
         attribute: 'STR',
+        PP: 0,
         special: 'roll 6, + 2 damage'
     },
     thief: {
         attribute: 'SK',
+        PP: 0,
         special: '+1 item slot'
     },
     minstrel: {
         attribute: 'SK',
+        PP: 0,
         special: 'dodge attack'
     },
     'sagrast knight monk': {
         attribute: 'MAG',
+        PP: 1,
         special: 'heal'
     },
     alchemist: {
         attribute: 'MAG',
+        PP: 2,
         special: 'better potion'
     }
 };
@@ -67,10 +74,13 @@ export type Save = {
     race: Race;
     kingdom: Kingdom;
     career: Career;
-    baseSTR: number;
-    baseSK: number;
-    baseMAG: number;
-    basePER: number;
+    STR: number;
+    SK: number;
+    MAG: number;
+    PER: number;
+    LP: number;
+    PP: number;
+    XP: number;
 };
 
 export const emptySave: Save = {
@@ -78,10 +88,13 @@ export const emptySave: Save = {
     race: 'elf',
     kingdom: 'snow',
     career: 'warrior',
-    baseSTR: 0,
-    baseSK: 0,
-    baseMAG: 0,
-    basePER: 0
+    STR: 0,
+    SK: 0,
+    MAG: 0,
+    PER: 0,
+    LP: 20,
+    PP: 0,
+    XP: 0,
 };
 
 export const store = writable<Save>(emptySave);
@@ -91,7 +104,10 @@ export const bonus = derived(store, function (store: Save): Record<StatName, num
         STR: 0,
         SK: 0,
         MAG: 0,
-        PER: 0
+        PER: 0,
+        LP: 0,
+        PP: 0,
+        XP: 0,
     };
 
     const kingdom = races[store.race][store.kingdom];
@@ -104,6 +120,8 @@ export const bonus = derived(store, function (store: Save): Record<StatName, num
     } else {
         bonus.PER += 1;
     }
+
+    bonus.PP += career.PP;
 
     return bonus;
 });
