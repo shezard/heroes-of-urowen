@@ -44,7 +44,7 @@ export const careers = {
     thief: {
         attribute: 'SK',
         PP: 0,
-        special: '+1 item slot'
+        special: 'more_slot'
     },
     minstrel: {
         attribute: 'SK',
@@ -84,7 +84,15 @@ export type Save = {
     totalXP: number;
     Z: number;
     roll: Roll | null;
+    weapon: Weapon;
+    bags: string[];
 };
+
+interface Weapon {
+    name: string;
+    stat: StatName;
+    dice: string;
+}
 
 interface Roll {
     name: string;
@@ -105,7 +113,13 @@ export const emptySave: Save = {
     XP: 0,
     totalXP: 0,
     Z: 15,
-    roll: null
+    roll: null,
+    weapon: {
+        name: 'dagger',
+        stat: 'SK',
+        dice: '1d6-3'
+    },
+    bags: ['', '', '', '', '', '', '']
 };
 
 export const store = writable<Save>(emptySave);

@@ -32,7 +32,7 @@
 <span class="flex">
     <span class="px-1">
         <span on:click={rollStat(name)} on:keypress={rollStat(name)} role="button" tabindex="0">
-            {name}
+            [{name}]
         </span>
         : {$bonus[name]} +
     </span>
