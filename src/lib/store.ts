@@ -1,6 +1,6 @@
 import { derived, writable } from 'svelte/store';
 
-export type StatName = 'STR' | 'SK' | 'MAG' | 'PER' | 'LP' | 'PP' | 'XP';
+export type StatName = 'STR' | 'SK' | 'MAG' | 'PER' | 'LP' | 'PP' | 'XP' | 'Z';
 
 export const races = {
     elf: {
@@ -81,7 +81,14 @@ export type Save = {
     LP: number;
     PP: number;
     XP: number;
+    Z: number;
+    roll: Roll | null;
 };
+
+interface Roll {
+    name: string;
+    value: number;
+}
 
 export const emptySave: Save = {
     name: '',
@@ -95,6 +102,8 @@ export const emptySave: Save = {
     LP: 20,
     PP: 0,
     XP: 0,
+    Z: 15,
+    roll: null
 };
 
 export const store = writable<Save>(emptySave);
@@ -108,6 +117,7 @@ export const bonus = derived(store, function (store: Save): Record<StatName, num
         LP: 0,
         PP: 0,
         XP: 0,
+        Z: 0
     };
 
     const kingdom = races[store.race][store.kingdom];

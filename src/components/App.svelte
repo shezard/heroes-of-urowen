@@ -3,7 +3,7 @@
     import { base } from '$app/paths';
     import { encode } from '$lib/url';
     import { get } from 'svelte/store';
-    import { careers, bonus, races, store } from '../lib/store';
+    import { careers, races, store } from '../lib/store';
     import { page } from '$app/stores';
     import Stat from './Stat.svelte';
 
@@ -55,22 +55,33 @@
         </label>
     </div>
 
+    {#if $store.roll}
+        <hr class="border-black m-2" />
+
+        <div class="p-1">
+            Last roll: {$store.roll.name} {$store.roll.value}
+        </div>
+    {/if}
+
     <hr class="border-black m-2" />
 
     <div class="grid grid-cols-2 p-1">
-        <Stat name='STR' />
-        <Stat name='SK' />
-        <Stat name='MAG' />
-        <Stat name='PER' />
+        <Stat name="STR" />
+        <Stat name="SK" />
+        <Stat name="MAG" />
+        <Stat name="PER" />
     </div>
 
     <hr class="border-black m-2" />
 
-    <div class="grid grid-cols-3 p-1">
-        <Stat name='LP' />
-        <Stat name='PP' />
-        <Stat name='XP' />
+    <div class="grid grid-cols-2 p-1">
+        <Stat name="LP" />
+        <Stat name="PP" />
+        <Stat name="XP" />
+        <Stat name="Z" />
     </div>
+
+    <hr class="border-black m-2" />
 </fieldset>
 
 <style>
