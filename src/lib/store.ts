@@ -86,6 +86,7 @@ export type Save = {
     roll: Roll | null;
     weapon: Weapon;
     bags: string[];
+    food: string;
 };
 
 interface Weapon {
@@ -119,7 +120,8 @@ export const emptySave: Save = {
         stat: 'SK',
         dice: '1d6-3'
     },
-    bags: ['', '', '', '', '', '', '']
+    bags: ['', '', '', '', '', '', ''],
+    food: ''
 };
 
 export const store = writable<Save>(emptySave);

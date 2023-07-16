@@ -9,6 +9,7 @@
     import XP from './XP.svelte';
     import StatInfo from './StatInfo.svelte';
     import Weapon from './Weapon.svelte';
+    import Z from './Z.svelte';
 
     const save = () => {
         const save = encode(get(store));
@@ -82,13 +83,30 @@
         <StatInfo name="LP" />
         <StatInfo name="PP" />
         <XP />
-        <StatInfo name="Z" />
+        <Z />
     </div>
 
     <hr class="border-black m-2" />
 
     <div class="p-1">
         Weapon : <Weapon />
+    </div>
+
+    <hr class="border-black m-2" />
+
+    <div class="p-1">
+        <div class="flex">
+            Helmet <input type="number" />
+        </div>
+        <div class="flex">
+            Chest <input type="number" />
+        </div>
+        <div class="flex">
+            Arms <input type="number" />
+        </div>
+        <div class="flex">
+            Greaves <input type="number" />
+        </div>
     </div>
 
     <hr class="border-black m-2" />
@@ -104,6 +122,11 @@
         {#if $store.career === 'thief'}
             <input type="text" bind:value={$store.bags[6]} />
         {/if}
+    </div>
+
+    <div class="p-1">
+        Food
+        <input type="text" bind:value={$store.food} />
     </div>
 </fieldset>
 
