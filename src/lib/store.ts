@@ -87,6 +87,7 @@ export type Save = {
     weapon: Weapon;
     bags: string[];
     food: string;
+    special: string;
     baseCamp: number;
 };
 
@@ -123,7 +124,8 @@ export const emptySave: Save = {
     },
     bags: ['', '', '', '', '', '', ''],
     food: '',
-    baseCamp: 0
+    special: '',
+    baseCamp: 0,
 };
 
 export const store = writable<Save>(emptySave);

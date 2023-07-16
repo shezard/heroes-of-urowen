@@ -18,15 +18,36 @@
 
     const rollDice = () => {
         store.update((store) => {
-
             store.roll = {
                 name: 'Roll a d6',
-                value: dice`1d6`,
+                value: dice`1d6`
             };
 
             return store;
         });
-    }
+    };
+
+    const hitLocation = () => {
+        store.update((store) => {
+            const roll = dice`1d6`;
+
+            const locations: Record<number, string> = {
+                1: 'Legs (-1)',
+                2: 'Trunk (0)',
+                3: 'Trunk (0)',
+                4: 'Trunk (0)',
+                5: 'Arms (+1)',
+                6: 'Head (+3)'
+            };
+
+            store.roll = {
+                name: `Hit ${locations[roll]}`,
+                value: roll
+            };
+
+            return store;
+        });
+    };
 
     $: store.set($page.data.save);
 </script>
@@ -111,12 +132,16 @@
             Base Camp :
             <input class="w-10" type="number" bind:value={$store.baseCamp} />
         </div>
-        <div on:click={rollDice} on:keypress={rollDice} role="button" tabindex="0">
-            [Roll Dice]
-        </div>
+        <div on:click={rollDice} on:keypress={rollDice} role="button" tabindex="0">[Roll Dice]</div>
     </div>
 
     <hr class="border-black m-2" />
+
+    <div class="p-1 px-2">
+        <div on:click={hitLocation} on:keypress={hitLocation} role="button" tabindex="0">
+            [Hit location]
+        </div>
+    </div>
 
     <div class="p-1 px-2">
         Weapon : <Weapon />
@@ -157,6 +182,11 @@
     <div class="p-1 px-2">
         Food
         <input type="text" bind:value={$store.food} />
+    </div>
+
+    <div class="p-1 px-2">
+        Special
+        <input type="text" bind:value={$store.special} />
     </div>
 </fieldset>
 
