@@ -81,6 +81,7 @@ export type Save = {
     LP: number;
     PP: number;
     XP: number;
+    totalXP: number;
     Z: number;
     roll: Roll | null;
 };
@@ -102,6 +103,7 @@ export const emptySave: Save = {
     LP: 20,
     PP: 0,
     XP: 0,
+    totalXP: 0,
     Z: 15,
     roll: null
 };
@@ -117,6 +119,7 @@ export const bonus = derived(store, function (store: Save): Record<StatName, num
         LP: 0,
         PP: 0,
         XP: 0,
+        totalXP: 0,
         Z: 0
     };
 
@@ -132,6 +135,9 @@ export const bonus = derived(store, function (store: Save): Record<StatName, num
     }
 
     bonus.PP += career.PP;
+
+    bonus.LP += Math.floor(store.totalXP / 10);
+    bonus.PP += Math.floor(store.totalXP / 4);
 
     return bonus;
 });

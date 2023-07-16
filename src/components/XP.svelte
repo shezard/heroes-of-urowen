@@ -1,0 +1,20 @@
+<script lang="ts">
+    import { store } from '../lib/store';
+
+    const addXP = function() {
+        store.update((store) => {
+            store.XP += 1;
+            store.totalXP += 1;
+            return store;
+        })
+    }
+</script>
+
+<span class="flex">
+    <span class="px-1">
+        XP : {$store.XP}
+        <span on:click={addXP} role="button" tabindex="0">
+            [+]
+        </span>
+    </span>
+</span>

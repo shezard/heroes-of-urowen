@@ -6,6 +6,8 @@
     import { careers, races, store } from '../lib/store';
     import { page } from '$app/stores';
     import Stat from './Stat.svelte';
+    import XP from './XP.svelte';
+    import StatInfo from './StatInfo.svelte';
 
     const save = () => {
         const save = encode(get(store));
@@ -75,10 +77,10 @@
     <hr class="border-black m-2" />
 
     <div class="grid grid-cols-2 p-1">
-        <Stat name="LP" />
-        <Stat name="PP" />
-        <Stat name="XP" />
-        <Stat name="Z" />
+        <StatInfo name="LP" />
+        <StatInfo name="PP" />
+        <XP />
+        <StatInfo name="Z" />
     </div>
 
     <hr class="border-black m-2" />
