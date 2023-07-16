@@ -9,11 +9,24 @@
     import XP from './XP.svelte';
     import StatInfo from './StatInfo.svelte';
     import Weapon from './Weapon.svelte';
+    import { dice } from '$lib/dice';
 
     const save = () => {
         const save = encode(get(store));
         goto(`${base}?save=${save}`);
     };
+
+    const rollDice = () => {
+        store.update((store) => {
+
+            store.roll = {
+                name: 'Roll a d6',
+                value: dice`1d6`,
+            };
+
+            return store;
+        });
+    }
 
     $: store.set($page.data.save);
 </script>
@@ -63,7 +76,7 @@
 
         <div class="p-1">
             Last roll: {$store.roll.name}
-            {$store.roll.value}
+            | {$store.roll.value} |
         </div>
     {/if}
 
@@ -93,9 +106,14 @@
 
     <hr class="border-black m-2" />
 
-    <div class="p-1 px-2">
-        Base Camp :
-        <input class="w-10" type="number" bind:value={$store.baseCamp} />
+    <div class="grid grid-cols-2 p-1 px-2">
+        <div>
+            Base Camp :
+            <input class="w-10" type="number" bind:value={$store.baseCamp} />
+        </div>
+        <div on:click={rollDice} on:keypress={rollDice} role="button" tabindex="0">
+            [Roll Dice]
+        </div>
     </div>
 
     <hr class="border-black m-2" />
