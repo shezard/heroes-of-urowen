@@ -2,7 +2,6 @@
     import { bonus, store, type StatName } from '../lib/store';
 
     export let name: StatName;
-
 </script>
 
 <span class="flex">

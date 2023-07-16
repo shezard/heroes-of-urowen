@@ -20,7 +20,7 @@
 <fieldset class="m-1 border-4 border-black border-double">
     <legend class="text-3xl ml-5 px-2">
         Heroes of Urowen
-        <span on:click={save} role="button" tabindex="0"> [Save] </span>
+        <span on:click={save} on:keypress={save} role="button" tabindex="0"> [Save] </span>
     </legend>
 
     <div class="grid grid-cols-2">
@@ -61,17 +61,18 @@
         <hr class="border-black m-2" />
 
         <div class="p-1">
-            Last roll: {$store.roll.name} {$store.roll.value}
+            Last roll: {$store.roll.name}
+            {$store.roll.value}
         </div>
     {/if}
 
     <hr class="border-black m-2" />
 
     <div class="grid grid-cols-2 p-1">
-        <Stat name="STR" />
-        <Stat name="SK" />
-        <Stat name="MAG" />
-        <Stat name="PER" />
+        <Stat name="STR" cost={8} />
+        <Stat name="SK" cost={8} />
+        <Stat name="MAG" cost={8} />
+        <Stat name="PER" cost={2} />
     </div>
 
     <hr class="border-black m-2" />

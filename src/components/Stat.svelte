@@ -4,6 +4,8 @@
 
     export let name: StatName;
 
+    export let cost: number;
+
     const rollStat = (name: StatName) => () => {
         const roll = dice`1d6` + $store[name] + $bonus[name];
 
@@ -15,18 +17,36 @@
 
             return store;
         });
+    };
 
-        return;
+    const increaseStat = (name: StatName) => () => {
+        store.update((store) => {
+            store.XP -= cost;
+            store[name] += 1;
+
+            return store;
+        });
     };
 </script>
 
 <span class="flex">
     <span class="px-1">
-        <span on:click={rollStat(name)} role="button" tabindex="0">
+        <span on:click={rollStat(name)} on:keypress={rollStat(name)} role="button" tabindex="0">
             {name}
         </span>
         : {$bonus[name]} +
     </span>
-    <input class="w-10" type="number" bind:value={$store[name]} />
-    <span>= {$store[name] + $bonus[name]}</span>
+    <span>
+        {$store[name]} = {$store[name] + $bonus[name]}
+        {#if $store.XP >= cost}
+            <span
+                on:click={increaseStat(name)}
+                on:keypress={increaseStat(name)}
+                role="button"
+                tabindex="0"
+            >
+                [+]
+            </span>
+        {/if}
+    </span>
 </span>
