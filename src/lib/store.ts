@@ -87,6 +87,7 @@ export type Save = {
     weapon: Weapon;
     bags: string[];
     food: string;
+    baseCamp: number;
 };
 
 interface Weapon {
@@ -121,7 +122,8 @@ export const emptySave: Save = {
         dice: '1d6-3'
     },
     bags: ['', '', '', '', '', '', ''],
-    food: ''
+    food: '',
+    baseCamp: 0
 };
 
 export const store = writable<Save>(emptySave);
@@ -136,7 +138,8 @@ export const bonus = derived(store, function (store: Save): Record<StatName, num
         PP: 0,
         XP: 0,
         totalXP: 0,
-        Z: 0
+        Z: 0,
+        baseCamp: 0
     };
 
     const kingdom = races[store.race][store.kingdom];

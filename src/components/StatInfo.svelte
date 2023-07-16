@@ -5,5 +5,5 @@
 </script>
 
 <span class="flex">
-    <span class="px-1">{name}: {$store[name] + $bonus[name]}</span>
+    <span class="px-1">{name} : {$store[name] + $bonus[name]}</span>
 </span>

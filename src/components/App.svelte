@@ -9,7 +9,6 @@
     import XP from './XP.svelte';
     import StatInfo from './StatInfo.svelte';
     import Weapon from './Weapon.svelte';
-    import Z from './Z.svelte';
 
     const save = () => {
         const save = encode(get(store));
@@ -26,12 +25,12 @@
     </legend>
 
     <div class="grid grid-cols-2">
-        <label class="flex p-1">
+        <label class="flex p-1 px-2">
             Name
             <input type="text" bind:value={$store.name} />
         </label>
 
-        <label class="flex p-1">
+        <label class="flex p-1 px-2">
             Race
             <select bind:value={$store.race}>
                 {#each Object.keys(races) as race}
@@ -40,7 +39,7 @@
             </select>
         </label>
 
-        <label class="flex p-1">
+        <label class="flex p-1 px-2">
             Kingdom
             <select bind:value={$store.kingdom}>
                 {#each Object.keys(races[$store.race]) as kingdom}
@@ -49,7 +48,7 @@
             </select>
         </label>
 
-        <label class="flex p-1">
+        <label class="flex p-1 px-2">
             Career
             <select bind:value={$store.career}>
                 {#each Object.keys(careers) as career}
@@ -83,18 +82,31 @@
         <StatInfo name="LP" />
         <StatInfo name="PP" />
         <XP />
-        <Z />
+
+        <span class="flex">
+            <span class="px-1">
+                Z :
+                <input class="w-10" type="number" bind:value={$store.Z} />
+            </span>
+        </span>
     </div>
 
     <hr class="border-black m-2" />
 
-    <div class="p-1">
+    <div class="p-1 px-2">
+        Base Camp :
+        <input class="w-10" type="number" bind:value={$store.baseCamp} />
+    </div>
+
+    <hr class="border-black m-2" />
+
+    <div class="p-1 px-2">
         Weapon : <Weapon />
     </div>
 
     <hr class="border-black m-2" />
 
-    <div class="p-1">
+    <div class="p-1 px-2">
         <div class="flex">
             Helmet <input type="number" />
         </div>
@@ -111,7 +123,7 @@
 
     <hr class="border-black m-2" />
 
-    <div class="p-1">
+    <div class="p-1 px-2">
         Bag slots
         <input type="text" bind:value={$store.bags[0]} />
         <input type="text" bind:value={$store.bags[1]} />
@@ -124,7 +136,7 @@
         {/if}
     </div>
 
-    <div class="p-1">
+    <div class="p-1 px-2">
         Food
         <input type="text" bind:value={$store.food} />
     </div>
