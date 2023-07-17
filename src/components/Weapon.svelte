@@ -49,9 +49,11 @@
         <span on:click={rollAttack} on:keypress={rollAttack} role="button" tabindex="0">
             [{$store.weapon.stat}]
         </span>
+        <span class="px-1" />
         <span on:click={rollDamage} on:keypress={rollDamage} role="button" tabindex="0">
             [{$store.weapon.dice}]
         </span>
+        <span class="px-1" />
         <span on:click={toggleEdit} on:keypress={toggleEdit} role="button" tabindex="0">
             [Edit]
         </span>

@@ -179,14 +179,16 @@
         {/if}
     </div>
 
+    <hr class="border-black m-2" />
+
     <div class="p-1 px-2">
         Food
-        <input type="text" bind:value={$store.food} />
+        <textarea bind:value={$store.food} />
     </div>
 
     <div class="p-1 px-2">
         Special
-        <input type="text" bind:value={$store.special} />
+        <textarea bind:value={$store.special} />
     </div>
 </fieldset>
 
@@ -196,7 +198,8 @@
     }
 
     input:not(.w-10),
-    select {
+    select,
+    textarea {
         width: 100%;
         text-indent: 2px;
         margin-left: 5px;
