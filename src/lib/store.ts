@@ -2,6 +2,8 @@ import { derived, writable } from 'svelte/store';
 
 export type StatName = 'STR' | 'SK' | 'MAG' | 'PER' | 'LP' | 'PP' | 'XP' | 'Z';
 
+export const stats = ['STR', 'SK', 'MAG'];
+
 export const races = {
     elf: {
         sylvan: 'MAG',

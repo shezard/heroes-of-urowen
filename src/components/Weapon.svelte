@@ -1,6 +1,6 @@
 <script lang="ts">
     import { dice } from '$lib/dice';
-    import { store } from '$lib/store';
+    import { stats, store } from '$lib/store';
 
     const rollAttack = () => {
         store.update((store) => {
@@ -32,9 +32,13 @@
 
 {#if edit}
     <span>
-        <input type="text" bind:value={$store.weapon.name} />
-        <input type="text" bind:value={$store.weapon.stat} />
-        <input type="text" bind:value={$store.weapon.dice} />
+        <input type="text" class="w-[50px]" bind:value={$store.weapon.name} />
+        <select bind:value={$store.weapon.stat}>
+            {#each stats as stat}
+                <option value={stat}>{stat}</option>
+            {/each}
+        </select>
+        <input type="text" class="w-[50px]" bind:value={$store.weapon.dice} />
         <span on:click={toggleEdit} on:keypress={toggleEdit} role="button" tabindex="0">
             [Save]
         </span>
