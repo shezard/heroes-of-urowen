@@ -21,14 +21,44 @@
             return store;
         });
     };
+
+    let edit = false;
+
+    const toggleEdit = () => {
+        edit = !edit;
+    }
+
 </script>
 
-<span>
-    {$store.weapon.name}
-    <span on:click={rollAttack} on:keypress={rollAttack} role="button" tabindex="0">
-        [{$store.weapon.stat}]
+{#if edit}
+    <span>
+        <input type="text" bind:value={$store.weapon.name} />
+        <input type="text" bind:value={$store.weapon.stat} />
+        <input type="text" bind:value={$store.weapon.dice} />
+        <span on:click={toggleEdit} on:keypress={toggleEdit} role="button" tabindex="0">
+            [Save]
+        </span>
     </span>
-    <span on:click={rollDamage} on:keypress={rollDamage} role="button" tabindex="0">
-        [{$store.weapon.dice}]
+{:else}
+    <span>
+        {$store.weapon.name}
+        <span on:click={rollAttack} on:keypress={rollAttack} role="button" tabindex="0">
+            [{$store.weapon.stat}]
+        </span>
+        <span on:click={rollDamage} on:keypress={rollDamage} role="button" tabindex="0">
+            [{$store.weapon.dice}]
+        </span>
+        <span on:click={toggleEdit} on:keypress={toggleEdit} role="button" tabindex="0">
+            [Edit]
+        </span>
     </span>
-</span>
+{/if}
+
+<style>
+    input {
+        text-indent: 2px;
+        margin-left: 5px;
+        border-bottom: 1px dashed black;
+        text-transform: capitalize;
+    }
+</style>
